@@ -1,0 +1,40 @@
+#include <stdint.h>
+#include <math.h>
+#include <divide10.h>
+
+static uint64_t div_factor[] = {
+14757395258967641293u,
+11805916207174113035u,
+9444732965739290431u,
+7555786372591432345u,
+6044629098073145876u,
+4835703278458516701u,
+3868562622766813360u,
+3094850098213450688u,
+2475880078570760551u,
+1980704062856608440u,
+1584563250285286752u,
+1267650600228229402u,
+1014120480182583526u,
+811296384146066817u,
+649037107316853458u,
+519229685853482763u,
+415383748682786215u,
+332306998946228969u,
+265845599156983178u,
+};
+
+uint64_t divide(uint64_t x, unsigned n) {
+  if (n == 0) return x;
+  if (n >= 20) return 0;
+
+ // uint64_t factor =  (((__uint128_t)18446744073709551615U + 10) << 2*n) / (__uint128_t)pow(5, n);
+ // printf("%ju,\n", (uintmax_t) factor);
+
+  uint64_t factor = div_factor[n-1];
+  x >>= n;
+  __uint128_t product = factor * (__uint128_t)x;
+  uint64_t result = product >> 64;
+  result >>= 2*n;
+  return result;
+}
