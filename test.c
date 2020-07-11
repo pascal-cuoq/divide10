@@ -32,7 +32,7 @@ int main(void) {
     10000000000000000000u,
   };
 
-  printf("\n%ju\n", d[0]);
+  printf("\n%ju\n", (uintmax_t)d[0]);
   
   for (uint8_t n=1; n < sizeof d / sizeof d[0] + 1; n++) {
     uint64_t i = d[n-1];

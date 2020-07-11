@@ -1,5 +1,4 @@
 #include <stdint.h>
-#include <math.h>
 #include <divide10.h>
 
 static uint64_t div_factor[] = {
@@ -24,12 +23,9 @@ static uint64_t div_factor[] = {
 265845599156983178u,
 };
 
-uint64_t divide(uint64_t x, unsigned n) {
+uint64_t divide(uint64_t x, uint64_t n) {
   if (n == 0) return x;
   if (n >= 20) return 0;
-
- // uint64_t factor =  (((__uint128_t)18446744073709551615U + 10) << 2*n) / (__uint128_t)pow(5, n);
- // printf("%ju,\n", (uintmax_t) factor);
 
   uint64_t factor = div_factor[n-1];
   x >>= n;
